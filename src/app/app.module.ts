@@ -14,7 +14,6 @@ import { UserService } from './services/user.service';
 import { MainMenuComponent } from './main-menu-page/main-menu/main-menu.component';
 import { LoginComponent } from './main-menu-page/login/login.component';
 import { AboutUsComponent } from './main-menu-page/about-us/about-us.component';
-import { HistoryComponent } from './main-menu-page/history/history.component';
 import { DetailsComponent } from './main-menu-page/details/details.component';
 
 @NgModule({
@@ -24,7 +23,6 @@ import { DetailsComponent } from './main-menu-page/details/details.component';
     MainMenuComponent,
     LoginComponent,
     AboutUsComponent,
-    HistoryComponent,
     DetailsComponent
   ],
   imports: [

@@ -18,4 +18,8 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
   }
 
+  onClickLogout(){
+    this.userService.isUserLoggedIn = false;
+  }
+
 }

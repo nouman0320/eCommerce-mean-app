@@ -13,10 +13,14 @@
             <span class="navbar-text ml-3">
                     <i class="fas fa-phone mr-1"></i> {{contactPhone}}
             </span>
-            <span class="navbar-text ml-3">
-                    <i class="fas fa-user mr-1"></i> Welcome {{this.userService.userFirstName}} {{this.userService.userLastName}}
+            <span *ngIf="userService.isUserLoggedIn" class="navbar-text ml-3">
+                    <i class="fas fa-user mr-1"></i> Hello {{this.userService.userFirstName}} {{this.userService.userLastName}}
             </span>
 
-            <button class="btn btn-sm btn-danger ml-3">log out</button>
+            <span *ngIf="!userService.isUserLoggedIn" class="navbar-text ml-3">
+                <i class="fas fa-user mr-1"></i> Hello Guest
+            </span>
+
+            <button *ngIf="userService.isUserLoggedIn" class="btn btn-sm btn-danger ml-3" type="button" (click)="onClickLogout()">log out</button>
         </div>
       </nav>

@@ -1,8 +1,35 @@
 <div class="card bg-light">
     <div class="m-4 mt-4 pb-4">
-        <p>details works!</p>
+        <img class="mb-4 mx-auto d-block" src="assets/img/Retail-shoping.png" width="100px" alt="image">
     
-        <app-history></app-history>
+        <p class="text-dark small text-center"><i class="fas fa-check-circle text-success mr-2"></i> Available products in our store - <strong>{{availableProducts}}</strong></p>
+        <p class="text-dark small text-center"><i class="fas fa-star text-warning mr-2"></i> Total orders submitted - <strong>{{totalSubmittedOrders}}</strong></p>
+
+        <hr/>
+        <div *ngIf="newUser">
+            <p class="text-dark text-center" style="cursor: pointer;"> Welcome to first purchase <i class="fas fa-arrow-right text-success ml-2"></i></p>
+        </div>
+
+        <div *ngIf="!newUser && oldCartExist">
+            <p class="text-dark text-center"> Continue shopping</p>
+        
+            <button type="button" class="btn btn-info btn-md mx-auto d-block">
+                <i class="fas fa-shopping-basket mr-1"></i> Cart <span class="badge badge-light ml-2">{{totalCartItems}}</span>
+                <span class="sr-only">cart items</span>
+              </button>
+    
+              <p class="text-secondary small text-center mt-2"><i class="fas fa-calendar text-secondary mr-2"></i>You were last logged in on {{lastLoginDate}}</p>
+        </div>
+        
+        <div *ngIf="!newUser && !oldCartExist">
+
+
+          <p class="text-dark text-center" style="cursor: pointer;"><i class="fas fa-shopping-basket mr-1"></i> Start new order <i class="fas fa-arrow-right text-success ml-2"></i></p>
+
+          <p class="text-secondary small text-center mt-2"><i class="fas fa-calendar text-secondary mr-2"></i>Last order on {{lastOrderDate}}</p>
+
+        </div>
+
     </div>
 </div>
 

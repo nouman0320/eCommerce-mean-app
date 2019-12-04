@@ -1,5 +1,5 @@
 <div class="row m-3">
-    <app-login class="col-12 col-lg-4 mt-2"></app-login>
-    <app-about-us class="col-12 col-lg-5 mt-2"></app-about-us>
-    <app-details class="col-12 col-lg-3 mt-2"></app-details>
+    <app-login *ngIf="!userService.isUserLoggedIn" class="col-12 col-lg-4 mt-2"></app-login>
+    <app-about-us class="col-12 col-lg-8 mt-2"></app-about-us>
+    <app-details *ngIf="userService.isUserLoggedIn" class="col-12 col-lg-4 mt-2"></app-details>
 </div>
