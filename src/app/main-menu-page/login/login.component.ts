@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +12,7 @@ export class LoginComponent implements OnInit {
   userPassword: String = "";
 
 
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit() {
   }
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSwitchToRegister(){
-    alert("switch to register");
+    this.router.navigate(['/register']);
   }
 
 }

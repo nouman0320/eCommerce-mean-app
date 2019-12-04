@@ -1,1 +1,139 @@
-<p>register works!</p>
+<div class="row m-3">
+
+    <div class="col-12 col-md-6 col-lg-6 mx-auto d-block">
+            <h3 class="mt-2">Register</h3>
+            <p class="text-secondary">Join us and start shopping today!</p>
+            <div class="card bg-light mt-2 p-4 pb-4">
+                    <form *ngIf="stepCount==0" (ngSubmit)="onNextStep()" #registerForm1="ngForm" class="pt-3">
+        
+                            <div class="form-group">
+                                <input type="number" class="form-control" id="_id"
+                                    required
+                                    pattern=".{9}"
+                                    placeholder="Id"
+                                    [(ngModel)]="userId" name="_id"
+                                    #_id="ngModel">
+                                <p *ngIf="_id.errors?.required" [hidden]="_id.valid || _id.pristine"
+                                class="text-danger small mt-1">Id is required</p>
+                                <p *ngIf="_id.errors?.pattern" [hidden]="_id.valid || _id.pristine"
+                                class="text-danger small mt-1">Length of id should be exactly 9 characters</p>
+                                
+                            </div>
+
+                            <div class="form-group">
+                                    <input type="email" class="form-control" id="email"
+                                        required
+                                        pattern="[^@]+@[^@]+\.[a-zA-Z]{2,6}"
+                                        placeholder="Email"
+                                        [(ngModel)]="userEmail" name="email"
+                                        #email="ngModel">
+                                    <p *ngIf="email.errors?.required" [hidden]="email.valid || email.pristine"
+                                    class="text-danger small mt-1">Email is required</p>
+                                    <p *ngIf="email.errors?.pattern" [hidden]="email.valid || email.pristine"
+                                    class="text-danger small mt-1">Please enter an valid email</p>
+                                    
+                                </div>
+                    
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="password"
+                                    required
+                                    placeholder="Password"
+                                    [(ngModel)]="userPassword" name="password"
+                                    #password="ngModel">
+                                <p [hidden]="password.valid || password.pristine"
+                                class="text-danger small mt-1">Password is required</p>
+                                
+                            </div>
+
+
+                            <div class="form-group">
+                                    <input type="password" class="form-control" id="password1"
+                                        required
+                                        pattern="{{ password.value }}"
+                                        placeholder="Confirm Password"
+                                        [(ngModel)]="userConfirmPassword" name="password1"
+                                        #password1="ngModel">
+                                    <p *ngIf="password1.errors?.required" [hidden]="password1.valid || password1.pristine"
+                                    class="text-danger small mt-1">re-enter password</p>
+                                    <p *ngIf="password1.errors?.pattern" [hidden]="password1.valid || password1.pristine"
+                                    class="text-danger small mt-1">Password and Confirm Password does not match</p>
+                                    
+                            </div>
+                    
+                            <button type="submit" class="btn btn-success btn-md" [disabled]="!registerForm1.form.valid">Next</button>
+                            <button class="btn btn-link text-secondary" (click)="onSwitchToLogin()" type="button">Already have account?</button>
+                    
+                            
+
+                        </form>
+
+
+
+                        <form *ngIf="stepCount==1" (ngSubmit)="onRegister()" #registerForm2="ngForm" class="pt-3">
+
+
+                            <div class="form-group">
+                                <select required [(ngModel)]="cityValue" name="cityselect" #selectcity class="form-control" id="cityselect">
+                                    <option disabled selected value="">Select City </option>
+                                    <option value="New York">New York</option>
+                                    <option value="Los Angles">Los Angeles</option>
+                                    <option value="Chicago">Chicago</option>
+                                    <option value="Houston">Houston</option>
+                                    <option value="phoenix">Phoenix</option>
+                                    <option value="Philadelphia">Philadelphia</option>
+                                    <option value="San Antonio">San Antonio</option>
+                                    <option value="San Diego">San Diego</option>
+                                    <option value="Dallas">Dallas</option>
+                                    <option value="San Jose">San Jose</option>
+                                </select>
+
+                                <p *ngIf="selectcity.errors?.required" [hidden]="selectcity.valid || selectcity.pristine"
+                                    class="text-danger small mt-1">Please select city</p>
+                            </div>
+
+
+                            <div class="form-group">
+                                    <input type="text" class="form-control" id="street"
+                                        required
+                                        placeholder="Street Address"
+                                        [(ngModel)]="userStreet" name="street"
+                                        #street="ngModel">
+                                    <p [hidden]="street.valid || street.pristine"
+                                    class="text-danger small mt-1">Street address is required</p>
+                                    
+                            </div>
+
+                            <div class="form-group">
+                                    <input type="text" class="form-control" id="firstname"
+                                        required
+                                        placeholder="First Name"
+                                        [(ngModel)]="userFirstName" name="firstname"
+                                        #firstname="ngModel">
+                                    <p [hidden]="firstname.valid || firstname.pristine"
+                                    class="text-danger small mt-1">First name is required</p>
+                                    
+                            </div>
+
+                            <div class="form-group">
+                                    <input type="text" class="form-control" id="lastname"
+                                        required
+                                        placeholder="Last Name"
+                                        [(ngModel)]="userLastName" name="lastname"
+                                        #lastname="ngModel">
+                                    <p [hidden]="lastname.valid || lastname.pristine"
+                                    class="text-danger small mt-1">Last name is required</p>
+                                    
+                            </div>
+
+                            <button type="submit" class="btn btn-success btn-md" [disabled]="!registerForm2.form.valid">Register</button>
+                            <button type="button" class="btn btn-secondary ml-2 mr-2" (click)="onBack()">Back</button>
+                            <button class="btn btn-link text-secondary" (click)="onSwitchToLogin()" type="button">Already have account?</button>
+                        </form>
+
+                        <p class="mt-4 w-50 mx-auto d-block"><ngb-progressbar type="info" [value]="progressBarValue" height="10px"></ngb-progressbar></p>
+                        <p class="mx-auto d-block small text-secondary">{{stepDesc}}</p>
+        
+        
+            </div>
+    </div>
+</div>
