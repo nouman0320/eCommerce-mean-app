@@ -8,7 +8,7 @@ export class UserService {
   userFirstName: String = "John";
   userLastName: String = "Doe";
 
-  isUserLoggedIn: Boolean = false;
+  isUserLoggedIn: Boolean = true;
 
   constructor() { }
 }

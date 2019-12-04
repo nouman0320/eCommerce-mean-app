@@ -15,6 +15,8 @@ import { MainMenuComponent } from './main-menu-page/main-menu/main-menu.componen
 import { LoginComponent } from './main-menu-page/login/login.component';
 import { AboutUsComponent } from './main-menu-page/about-us/about-us.component';
 import { DetailsComponent } from './main-menu-page/details/details.component';
+import { RegisterComponent } from './register-page/register/register.component';
+import { NotFoundComponent } from './page-404/not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +25,9 @@ import { DetailsComponent } from './main-menu-page/details/details.component';
     MainMenuComponent,
     LoginComponent,
     AboutUsComponent,
-    DetailsComponent
+    DetailsComponent,
+    RegisterComponent,
+    NotFoundComponent
   ],
   imports: [
     NgbModule,
