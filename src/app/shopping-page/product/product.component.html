@@ -7,5 +7,71 @@
                     <a [ngClass]="wineDrinks" (click)="onSelect(3)" style="cursor: pointer;">Wine & Drinks</a>
             </nav>
             <hr/>
+
+
+            <div class="row">
+                    <div style="cursor: pointer;" (click)="open(content)" class="card col-12 col-sm-5 col-md-5 col-lg-3 m-1">
+                            <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-3.jpg" class="card-img-top" alt="product">
+                            <div class="card-body">
+                                <h5 class="card-title">Product 1</h5>
+                                <p class="text-secondary small">Remaining Quantity: 45</p>
+                                <h5 class="text-success">$ 40.00</h5>
+                            </div>
+                    </div>
+
+                    <!--
+
+                        FOR TEST
+                    -->
+
+                    <div class="card col-12 col-sm-5 col-md-5 col-lg-3 m-1">
+                            <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-3.jpg" class="card-img-top" alt="product">
+                            <div class="card-body">
+                                <h5 class="card-title">Product 1</h5>
+                                <p class="text-secondary small">Remaining Quantity: 45</p>
+                                <h5 class="text-success">$ 40.00</h5>
+                            </div>
+                    </div>
+                    
+                    
+            </div>
+
+            
     </div>
 </div>
+
+
+<ng-template #content let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>
+          <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h5>Product 1</h5>
+          <p class="text-secondary">Total Quantity Available: 20</p>
+          <div class="row">
+                <div class="col-6 col-lg-4 mx-auto d-block">
+                        <div class="input-group">
+                    <span class="input-group-btn">
+                        <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
+                                <i class="fas fa-minus"></i>
+                        </button>
+                    </span>
+                    <input type="text" id="quantity" name="quantity" class="form-control input-number" value="10" min="1" max="100">
+                    <span class="input-group-btn">
+                        <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </span>
+                </div>
+        </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" (click)="modal.close('Save click')">Add to Cart</button>
+        </div>
+      </ng-template>
+      
+      
