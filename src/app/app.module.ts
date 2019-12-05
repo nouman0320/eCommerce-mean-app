@@ -17,6 +17,10 @@ import { AboutUsComponent } from './main-menu-page/about-us/about-us.component';
 import { DetailsComponent } from './main-menu-page/details/details.component';
 import { RegisterComponent } from './register-page/register/register.component';
 import { NotFoundComponent } from './page-404/not-found/not-found.component';
+import { ShoppingComponent } from './shopping-page/shopping/shopping.component';
+import { CartComponent } from './shopping-page/cart/cart.component';
+import { ProductComponent } from './shopping-page/product/product.component';
+import { SearchComponent } from './shopping-page/search/search.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +31,11 @@ import { NotFoundComponent } from './page-404/not-found/not-found.component';
     AboutUsComponent,
     DetailsComponent,
     RegisterComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    ShoppingComponent,
+    CartComponent,
+    ProductComponent,
+    SearchComponent
   ],
   imports: [
     NgbModule,

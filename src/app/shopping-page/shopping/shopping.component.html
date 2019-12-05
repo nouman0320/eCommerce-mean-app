@@ -1,0 +1,11 @@
+<div class="row no-gutters">
+    <app-search class="col-12 bg-dark"></app-search>
+</div>
+
+<div class="row m-3">
+        <div [ngClass]="appCartClass">
+            <p class="text-right pr-3 text-secondary"><span class="badge badge-pill badge-info mr-2">Cart Items: {{cartCount}}</span><i *ngIf="windowState!=0" class="fas fa-window-minimize" (click)="onMinimize()" style="cursor: pointer;"></i><i *ngIf="windowState!=2" class="fas fa-window-maximize ml-2" (click)="onMaximize()" style="cursor: pointer;"></i></p>
+            <app-cart *ngIf="windowState!=0"></app-cart>
+        </div>
+        <app-product [ngClass]="appProductClass"></app-product>
+</div>

@@ -4,10 +4,12 @@ import { AppComponent } from './app.component';
 import { MainMenuComponent } from './main-menu-page/main-menu/main-menu.component';
 import { RegisterComponent } from './register-page/register/register.component';
 import { NotFoundComponent } from './page-404/not-found/not-found.component';
+import { ShoppingComponent } from './shopping-page/shopping/shopping.component';
 
 const routes: Routes = [
   {path: '', component: MainMenuComponent},
   {path: 'register', component: RegisterComponent},
+  {path: 'shop', component: ShoppingComponent},
   {path: '**', component: NotFoundComponent}
 ];
 
