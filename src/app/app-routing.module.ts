@@ -6,12 +6,14 @@ import { RegisterComponent } from './register-page/register/register.component';
 import { NotFoundComponent } from './page-404/not-found/not-found.component';
 import { ShoppingComponent } from './shopping-page/shopping/shopping.component';
 import { OrderComponent } from './order-page/order/order.component';
+import { AdminComponent } from './admin-page/admin/admin.component';
 
 const routes: Routes = [
   {path: '', component: MainMenuComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'shop', component: ShoppingComponent},
   {path: 'checkout', component: OrderComponent},
+  {path: 'admin', component: AdminComponent},
   {path: '**', component: NotFoundComponent}
 ];
 

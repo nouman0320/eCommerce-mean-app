@@ -23,6 +23,8 @@ import { ProductComponent } from './shopping-page/product/product.component';
 import { SearchComponent } from './shopping-page/search/search.component';
 import { OrderComponent } from './order-page/order/order.component';
 import { CheckoutComponent } from './order-page/checkout/checkout.component';
+import { AdminComponent } from './admin-page/admin/admin.component';
+import { ProductManagementComponent } from './admin-page/product-management/product-management.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { CheckoutComponent } from './order-page/checkout/checkout.component';
     ProductComponent,
     SearchComponent,
     OrderComponent,
-    CheckoutComponent
+    CheckoutComponent,
+    AdminComponent,
+    ProductManagementComponent
   ],
   imports: [
     NgbModule,
