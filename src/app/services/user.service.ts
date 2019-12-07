@@ -9,6 +9,7 @@ export class UserService {
   userLastName: String = "Doe";
 
   isUserLoggedIn: Boolean = true;
+  isUserBusy: Boolean = false;
 
   constructor() { }
 }
