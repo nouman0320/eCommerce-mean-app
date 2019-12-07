@@ -21,6 +21,8 @@ import { ShoppingComponent } from './shopping-page/shopping/shopping.component';
 import { CartComponent } from './shopping-page/cart/cart.component';
 import { ProductComponent } from './shopping-page/product/product.component';
 import { SearchComponent } from './shopping-page/search/search.component';
+import { OrderComponent } from './order-page/order/order.component';
+import { CheckoutComponent } from './order-page/checkout/checkout.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { SearchComponent } from './shopping-page/search/search.component';
     ShoppingComponent,
     CartComponent,
     ProductComponent,
-    SearchComponent
+    SearchComponent,
+    OrderComponent,
+    CheckoutComponent
   ],
   imports: [
     NgbModule,

@@ -1,0 +1,79 @@
+<div class="card bg-light mt-2 row no-gutters p-3">
+        <div class="col-12 col-lg-6 mx-auto d-block m-4 mt-4 pb-4">
+        <h5 class="text-dark">Checkout</h5>
+    
+        <form (ngSubmit)="onSubmit(content)" #orderForm="ngForm" class="pt-3">
+            <p class="text-secondary">Shipping Details:</p>
+            <hr/>
+            <div class="form-group">
+                <input type="text" class="form-control" id="city"
+                    required
+                    placeholder="City"
+                    [(ngModel)]="orderCity" name="city"
+                    #city="ngModel">
+                <p [hidden]="city.valid || city.pristine"
+                class="text-danger small mt-1">City is required</p>
+                
+            </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control" id="street"
+                    required
+                    placeholder="Street"
+                    [(ngModel)]="orderStreet" name="street"
+                    #street="ngModel">
+                <p [hidden]="street.valid || street.pristine"
+                class="text-danger small mt-1">Street is required</p>
+                    
+            </div>
+
+
+            <div class="form-group">
+                <div class="input-group">
+                    <input required [readonly]="true" class="form-control" placeholder="yyyy-mm-dd"
+                            name="dp" [(ngModel)]="orderDate" ngbDatepicker #d="ngbDatepicker">
+                    <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" (click)="d.toggle()" type="button"><i class="fas fa-calendar"></i></button>
+                    </div>
+                </div>
+            </div>
+
+            <p class="text-secondary">Payments:</p>
+            <hr/>
+
+            <div class="form-group">
+                    <input type="tel" class="form-control" id="card"
+                        required
+                        placeholder="Credit Card"
+                        pattern="^(?:4[0-9]{12}(?:[0-9]{3})?|[25][1-7][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$"
+                        [(ngModel)]="orderCard" name="card"
+                        #card="ngModel">
+                    <p [hidden]="card.valid || card.pristine"
+                    class="text-danger small mt-1">Enter a valid credit card.</p>
+                    
+                </div>
+    
+            <div class="row">
+                    <button type="submit" class="btn btn-success btn-md mx-auto d-block" [disabled]="!orderForm.form.valid">Order</button>
+            </div>
+        </form>
+    
+    
+        </div>
+    </div>
+
+    <ng-template #content let-modal>
+            <div class="modal-header">
+              <h4 class="modal-title" id="modal-basic-title">Confirmation</h4>
+              <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p class="text-secondary">Your order has been placed successfully</p>
+              
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" (click)="onDownload()">Download Receipt</button>
+            </div>
+          </ng-template>
