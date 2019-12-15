@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { WebService } from 'src/app/services/web.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-register',
@@ -19,13 +21,12 @@ export class RegisterComponent implements OnInit {
   userPassword: String;
   userConfirmPassword: String;
 
-
   cityValue: String = "";
   userStreet: String;
   userFirstName: String;
   userLastName: String;
 
-  constructor(public router: Router, public userService: UserService) {
+  constructor(public router: Router, public userService: UserService, public webService: WebService, public toastrService: ToastrService) {
     if(this.userService.isUserLoggedIn){
       this.router.navigate(['']);
     }
@@ -56,7 +57,47 @@ export class RegisterComponent implements OnInit {
     this.progressBarValue = 100;
     this.stepDesc = "Almost done..";
 
-    this.router.navigate(['']);
+    this.userService.setBusy(true);
+
+    const customer = {
+      "firstName": this.userFirstName,
+      "lastName": this.userLastName,
+      "username": this.userEmail,
+      "password": this.userPassword,
+      "addressCity": this.cityValue,
+      "addressStreet": this.userStreet,
+      "id": this.userId
+    }
+
+    this.webService.customerRegister(customer).subscribe(
+      data => {
+        this.userService.user.id = data.data.id;
+        this.userService.user.username = data.data.username;
+
+        /*
+        this.webService.customerDetails(this.userService.user.username).subscribe(
+          data=>{
+            this.userService.setSession(data.data);
+            //console.log(this.userService.user);
+            this.userService.setBusy(false);
+            this.router.navigate(['']);
+          },
+          err=>{
+            this.toastrService.error(err.error.message);
+            this.userService.setBusy(false);
+            this.onNextStep();
+          }
+        );*/
+
+        this.userService.setBusy(false);
+        this.router.navigate(['']);
+      },
+      err => {
+        this.toastrService.error(err.error.message);
+        this.userService.setBusy(false);
+        this.onNextStep();
+      }
+    );
   }
 
 

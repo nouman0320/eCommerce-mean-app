@@ -1,9 +1,8 @@
 export class User {
     firstName: String;
     lastName: String;
-    userName: String;
-    adressCity: String;
-    adressStreet: String;
+    username: String;
+    addressCity: String;
+    addressStreet: String;
     id: Number;
-    
 }

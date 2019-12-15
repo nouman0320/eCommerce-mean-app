@@ -14,7 +14,7 @@
                     <i class="fas fa-phone mr-1"></i> {{contactPhone}}
             </span>
             <span *ngIf="userService.isUserLoggedIn" class="navbar-text ml-3">
-                    <i class="fas fa-user mr-1"></i> Hello {{this.userService.userFirstName}} {{this.userService.userLastName}}
+                    <i class="fas fa-user mr-1"></i> Hello {{this.userService.user.firstName}} {{this.userService.user.lastName}}
             </span>
 
             <span *ngIf="!userService.isUserLoggedIn" class="navbar-text ml-3">

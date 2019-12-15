@@ -1,12 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule }   from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ToastrModule } from 'ngx-toastr';
 
 
 import { HeaderComponent } from './navigation-header/navigation/header/header.component';
@@ -25,6 +27,7 @@ import { OrderComponent } from './order-page/order/order.component';
 import { CheckoutComponent } from './order-page/checkout/checkout.component';
 import { AdminComponent } from './admin-page/admin/admin.component';
 import { ProductManagementComponent } from './admin-page/product-management/product-management.component';
+import { WebService } from './services/web.service';
 
 @NgModule({
   declarations: [
@@ -47,12 +50,14 @@ import { ProductManagementComponent } from './admin-page/product-management/prod
   ],
   imports: [
     NgbModule,
+    HttpClientModule,
     FormsModule,
     BrowserModule,
     AppRoutingModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({positionClass: 'toast-bottom-right'})
   ],
-  providers: [UserService],
+  providers: [UserService, WebService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

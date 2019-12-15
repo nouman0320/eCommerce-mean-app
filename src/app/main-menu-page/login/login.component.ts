@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { WebService } from 'src/app/services/web.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -12,13 +15,39 @@ export class LoginComponent implements OnInit {
   userPassword: String = "";
 
 
-  constructor(public router: Router) { }
+  constructor(public router: Router, public toastrService: ToastrService, public webService: WebService, public userService: UserService) { }
 
   ngOnInit() {
   }
 
   onSubmit(){
-    alert("submit");
+    
+    this.userService.setBusy(true);
+
+    const customer = {
+      "username": this.userName,
+      "password": this.userPassword
+    }
+
+    this.webService.customerLogin(customer).subscribe(
+      data => {
+        this.webService.customerDetails(data.data.username).subscribe(
+          data=>{
+            this.userService.setSession(data.data);
+            this.userService.setBusy(false);
+          },
+          err=>{
+            this.toastrService.error(err.error.message);
+            this.userService.setBusy(false);
+          }
+        );
+      },
+      err => {
+        this.toastrService.error(err.error.message);
+        this.userService.setBusy(false);
+      }
+    );
+
   }
 
   onSwitchToRegister(){
