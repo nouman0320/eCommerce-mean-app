@@ -145,4 +145,49 @@ export class WebService {
   // ==================================================================================
 
 
+
+  //
+  //  CART CALLS START
+  //
+
+  newCart(cart: any): Observable<any>{
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    let body = JSON.stringify(cart);
+    return this.http.post('api/shopping-cart' , body, {
+      headers: headers
+    });
+  }
+
+  updateCart(cart: any): Observable<any>{
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    let body = JSON.stringify(cart);
+    return this.http.post('api/shopping-cart/update' , body, {
+      headers: headers
+    });
+  }
+
+  getlatestCart(customerId: String): Observable<any>{
+    let headers = new HttpHeaders();
+    return this.http.get('api/shopping-cart/latest/'+customerId, {
+      headers: headers
+    });
+  }
+
+
+  markCartComplete(id: String): Observable<any>{
+    let headers = new HttpHeaders();
+    return this.http.post('api/shopping-cart/complete/'+id, {
+      headers: headers
+    });
+  }
+
+  //
+  //  CART CALLS END
+  //
+
+  // ==================================================================================
+
+
 }

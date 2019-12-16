@@ -5,6 +5,7 @@ const customerRoutes = require('./customer.route');
 const adminRoutes = require('./administrator.route');
 const categoryRoutes = require('./category.route');
 const groceryItemRoutes = require('./grocery-item.route');
+const shoppingCartRoutes = require('./shopping-cart.route');
 
 
 router.get('/', function (req, res) {
@@ -15,5 +16,6 @@ router.use('/customers', customerRoutes);
 router.use('/admins', adminRoutes);
 router.use('/categories', categoryRoutes);
 router.use('/grocery-items', groceryItemRoutes);
+router.use('/shopping-cart', shoppingCartRoutes);
 
 module.exports = router;

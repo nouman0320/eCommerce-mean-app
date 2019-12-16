@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from 'src/app/services/cart.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-details',
@@ -7,20 +9,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DetailsComponent implements OnInit {
 
-  availableProducts: Number = 12;
-  totalSubmittedOrders: Number = 42;
 
-  totalCartItems: Number = 6;
-
-  lastLoginDate: String = "Feb 22, 2019";
-  lastOrderDate: String = "Feb 22, 2019";
-
-  newUser: Boolean = false;
-  oldCartExist: Boolean = true;
-
-  constructor() { }
+  constructor(public router: Router) { }
 
   ngOnInit() {
   }
 
+  gotoShop(){
+    this.router.navigate(["shop"]);
+  }
 }

@@ -30,6 +30,7 @@ import { ProductManagementComponent } from './admin-page/product-management/prod
 import { WebService } from './services/web.service';
 import { AdminLoginComponent } from './admin-page/admin-login/admin-login.component';
 import { ProductService } from './services/product.service';
+import { CartService } from './services/cart.service';
 
 @NgModule({
   declarations: [
@@ -60,7 +61,7 @@ import { ProductService } from './services/product.service';
     BrowserAnimationsModule,
     ToastrModule.forRoot({positionClass: 'toast-bottom-right'})
   ],
-  providers: [UserService, WebService, ProductService],
+  providers: [UserService, WebService, ProductService, CartService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

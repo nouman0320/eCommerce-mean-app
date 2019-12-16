@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { User } from '../Models/user';
 import { WebService } from './web.service';
 import { Router } from '@angular/router';
+import { CartService } from './cart.service';
 
 @Injectable({
   providedIn: 'root'
@@ -17,7 +18,7 @@ export class UserService {
 
   recentlyRemovedSession: Boolean = false;
 
-  constructor(public webService: WebService, public router: Router) {
+  constructor(public webService: WebService, public router: Router, public cartService: CartService) {
     this.user.firstName = "John";
     this.user.lastName = "Doe";
     this.doesPreviousSessionExist();
@@ -34,6 +35,7 @@ export class UserService {
     this.isUserLoggedIn = true;
     localStorage.setItem("username", this.user.username.toString());
     localStorage.setItem("id", this.user.id.toString());
+    this.cartService.initializeCart(this.user.id);
   }
 
 
