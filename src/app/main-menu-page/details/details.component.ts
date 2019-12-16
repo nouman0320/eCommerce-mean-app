@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 export class DetailsComponent implements OnInit {
 
 
-  constructor(public router: Router) { }
+  constructor(public router: Router, public cartService: CartService) { }
 
   ngOnInit() {
   }
