@@ -19,11 +19,13 @@ const AdministratorSchema = new mongoose.Schema({
     required: true
   },
   id: {
-    type: Number
+    type: Number,
+    required: true
   },
 });
 
-AdministratorSchema.plugin(AutoIncrement, {id:'administrator_seq',inc_field: 'id'});
+//AdministratorSchema.plugin(AutoIncrement, {id:'administrator_seq',inc_field: 'id'});
+
 const Administrator = mongoose.model('Administrator', AdministratorSchema);
 
 module.exports = Administrator;

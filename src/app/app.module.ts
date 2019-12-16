@@ -28,6 +28,7 @@ import { CheckoutComponent } from './order-page/checkout/checkout.component';
 import { AdminComponent } from './admin-page/admin/admin.component';
 import { ProductManagementComponent } from './admin-page/product-management/product-management.component';
 import { WebService } from './services/web.service';
+import { AdminLoginComponent } from './admin-page/admin-login/admin-login.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +47,8 @@ import { WebService } from './services/web.service';
     OrderComponent,
     CheckoutComponent,
     AdminComponent,
-    ProductManagementComponent
+    ProductManagementComponent,
+    AdminLoginComponent
   ],
   imports: [
     NgbModule,

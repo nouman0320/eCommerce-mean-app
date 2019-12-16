@@ -1,8 +1,9 @@
 <div class="row no-gutters">
-        <app-search class="col-12 bg-dark"></app-search>
+        <app-search *ngIf="userService.isUserLoggedIn" class="col-12 bg-dark"></app-search>
     </div>
     
     <div class="row m-3">
-            <app-product-management class="col-12 col-md-4"></app-product-management>
-            <app-product class="col-12 col-md-8"></app-product>
+            <app-admin-login *ngIf="!userService.isUserLoggedIn" class="col-12 col-md-4 col-lg-4 mt-4 mx-auto d-block"></app-admin-login>
+            <app-product-management *ngIf="userService.isUserLoggedIn" class="col-12 col-md-4"></app-product-management>
+            <app-product *ngIf="userService.isUserLoggedIn" class="col-12 col-md-8"></app-product>
     </div>

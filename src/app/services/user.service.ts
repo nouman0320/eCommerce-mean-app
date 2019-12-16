@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { User } from '../Models/user';
 import { WebService } from './web.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,10 @@ export class UserService {
 
   user: User = new User();
 
-  constructor(public webService: WebService) {
+
+  recentlyRemovedSession: Boolean = false;
+
+  constructor(public webService: WebService, public router: Router) {
     this.user.firstName = "John";
     this.user.lastName = "Doe";
     this.doesPreviousSessionExist();
@@ -39,6 +43,8 @@ export class UserService {
   removeSession(){
     this.isUserLoggedIn = false;
     localStorage.clear();
+    this.recentlyRemovedSession = true;
+    console.log("removeSession() called");
   }
 
 
@@ -52,6 +58,9 @@ export class UserService {
   doesPreviousSessionExist(){
     this.setBusy(true);
 
+    //alert(this.router.url);
+    console.log("doesPreviousSessionExist() called");
+
     if(localStorage.getItem("admin_mode") === "true"){ // admin has to re-login everytime
       this.setBusy(false);
       this.removeSession();
@@ -61,17 +70,23 @@ export class UserService {
     if(localStorage.getItem("username") != null || localStorage.getItem("id") != null){
       this.webService.customerDetails(localStorage.getItem("username")).subscribe(
         data=>{
-          this.setSession(data.data);
+          console.log("inside network call");
+          if(!this.recentlyRemovedSession){
+            this.setSession(data.data);
+          }
+          else this.recentlyRemovedSession = false;
           this.setBusy(false);
         },
         err=>{
           this.setBusy(false);
+          this.recentlyRemovedSession = false;
         }
       );
     } else {
       // session does not exist
       this.removeSession(); // clearing garbage if any
       this.setBusy(false);
+      this.recentlyRemovedSession = false;
     }
   }
 
