@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-product',
@@ -12,38 +13,24 @@ export class ProductComponent implements OnInit {
   activeClass: String = 'nav-item nav-link active bg-dark';
   notActiveClass: String = 'nav-item nav-link text-secondary';
 
-  milkEggs: String = this.activeClass;
-  vegetableFruits: String = this.notActiveClass;
-  meatFish: String = this.notActiveClass;
-  wineDrinks: String = this.notActiveClass;
 
+  selection: number = 0;
 
-  selection: Number = 0;
-
-  constructor(private modalService: NgbModal) { }
+  constructor(private modalService: NgbModal, public productService: ProductService) {
+    this.productService.updateCategories(this.selection);
+  }
 
   ngOnInit() {
   }
 
 
 
-  onSelect(n: Number){
-    this.milkEggs = this.notActiveClass;
-    this.vegetableFruits = this.notActiveClass;
-    this.meatFish = this.notActiveClass;
-    this.wineDrinks= this.notActiveClass;
-    if(n==0){
-      this.milkEggs = this.activeClass;
-    }
-    else if(n==1){
-      this.vegetableFruits = this.activeClass;
-    }
-    else if(n==2){
-      this.meatFish = this.activeClass;
-    }
-    else if(n==3){
-      this.wineDrinks = this.activeClass;
-    }
+  onSelect(n: number){
+
+    //console.log("select: "+n);
+
+    this.productService.categoryClass[this.selection] = this.notActiveClass;
+    this.productService.categoryClass[n] = this.activeClass;
     this.selection = n;
   }
 

@@ -29,6 +29,7 @@ import { AdminComponent } from './admin-page/admin/admin.component';
 import { ProductManagementComponent } from './admin-page/product-management/product-management.component';
 import { WebService } from './services/web.service';
 import { AdminLoginComponent } from './admin-page/admin-login/admin-login.component';
+import { ProductService } from './services/product.service';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,7 @@ import { AdminLoginComponent } from './admin-page/admin-login/admin-login.compon
     BrowserAnimationsModule,
     ToastrModule.forRoot({positionClass: 'toast-bottom-right'})
   ],
-  providers: [UserService, WebService],
+  providers: [UserService, WebService, ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

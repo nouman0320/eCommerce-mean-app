@@ -85,4 +85,20 @@ export class WebService {
 
   // ==================================================================================
 
+  //
+  //  CATEGORY CALLS START
+  //
+
+  allCategories(): Observable<any>{
+    let headers = new HttpHeaders();
+    return this.http.get('api/categories', {
+      headers: headers
+    });
+  }
+
+  //
+  //  CATEGORY CALLS END
+  //
+
+  // ==================================================================================
 }
