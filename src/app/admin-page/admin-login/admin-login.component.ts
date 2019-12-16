@@ -22,4 +22,34 @@ export class AdminLoginComponent implements OnInit {
   ngOnInit() {
   }
 
+
+  onSubmit(){
+    this.userService.setBusy(true);
+
+    const admin = {
+      "username": this.userName,
+      "password": this.userPassword
+    }
+
+    this.webService.adminLogin(admin).subscribe(
+      data => {
+        this.webService.adminDetails(data.data.username).subscribe(
+          data=>{
+            this.userService.setSession(data.data);
+            this.userService.setAdminMode(true);
+            this.userService.setBusy(false);
+          },
+          err=>{
+            this.toastrService.error(err.error.message);
+            this.userService.setBusy(false);
+          }
+        );
+      },
+      err => {
+        this.toastrService.error(err.error.message);
+        this.userService.setBusy(false);
+      }
+    );
+  }
+
 }

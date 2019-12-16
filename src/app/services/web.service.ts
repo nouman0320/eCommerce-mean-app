@@ -45,4 +45,44 @@ export class WebService {
   //  CUSTOMER CALLS END
   //
 
+  // ==================================================================================
+
+  //
+  //  ADMIN CALLS START
+  //
+
+  adminLogin(admin: any): Observable<any>{
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    let body = JSON.stringify(admin);
+    return this.http.post('/api/admins/login' , body, {
+      headers: headers
+    });
+  }
+
+  // NOT ALLOWING ADMIN TO REGISTER FROM FRONT_END
+  /*
+  adminRegister(admin: any): Observable<any>{
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    let body = JSON.stringify(admin);
+    return this.http.post('/api/customers/' , body, {
+      headers: headers
+    });
+  }*/
+
+  adminDetails(username: String): Observable<any>{
+    let headers = new HttpHeaders();
+    return this.http.get('api/admins/'+username, {
+      headers: headers
+    });
+  }
+
+
+  //
+  //  ADMIN CALLS END
+  //
+
+  // ==================================================================================
+
 }

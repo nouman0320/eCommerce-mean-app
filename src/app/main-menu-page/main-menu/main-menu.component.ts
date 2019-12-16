@@ -8,7 +8,11 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class MainMenuComponent implements OnInit {
 
-  constructor(public userService: UserService) { }
+  constructor(public userService: UserService) {
+    if(this.userService.isUserAdmin){
+      this.userService.logout();
+    }
+   }
 
   ngOnInit() {
   }

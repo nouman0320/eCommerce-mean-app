@@ -2,7 +2,7 @@ const Admin = require('../models/administrator.model');
 
 // Method to login administrator
 exports.adminLogin = function(req, res){
-    Customer.findOne({"username": req.body.username, "password": req.body.password})
+    Admin.findOne({"username": req.body.username, "password": req.body.password})
     .then(function (admin) {
 
         if(admin == null) throw new Error("Username or Password incorrect");
@@ -25,16 +25,16 @@ exports.adminLogin = function(req, res){
 
 // Method to get administrator details by username
 exports.adminDetails = function(req, res){
-    Customer.findOne({"username": req.params.username})
+    Admin.findOne({"username": req.params.username})
     .then(function (admin) {
 
         if(admin == null) throw new Error("Admin doesn't exist");
 
         const adminR = {
-            "id": adminR.id,
-            "firstName": adminR.firstName,
-            "lastName": adminR.lastName,
-            "username": adminR.username
+            "id": admin.id,
+            "firstName": admin.firstName,
+            "lastName": admin.lastName,
+            "username": admin.username
         }
 
       return res.status(200).json({
@@ -56,7 +56,7 @@ exports.adminDetails = function(req, res){
 exports.create = function (req, res) {
 
 
-    const administrator = new administrator({
+    const administrator = new Admin({
       "firstName": req.body.firstName,
       "lastName": req.body.lastName,
       "username": req.body.username,

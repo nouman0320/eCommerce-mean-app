@@ -29,6 +29,7 @@ export class UserService {
 
 
   setSession(data: any){
+    this.user = new User();
     this.user = data;
     this.isUserLoggedIn = true;
     localStorage.setItem("username", this.user.username.toString());
