@@ -101,4 +101,48 @@ export class WebService {
   //
 
   // ==================================================================================
+
+   //
+  //  GROCERY ITEM CALLS START
+  //
+
+  newGroceryItem(groceryItem: any): Observable<any>{
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    let body = JSON.stringify(groceryItem);
+    return this.http.post('/api/grocery-items/' , body, {
+      headers: headers
+    });
+  }
+
+  updateGroceryItem(groceryItem: any): Observable<any>{
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    let body = JSON.stringify(groceryItem);
+    return this.http.post('/api/grocery-items/update' , body, {
+      headers: headers
+    });
+  }
+
+  getGroceryItemDetail(id: String): Observable<any>{
+    let headers = new HttpHeaders();
+    return this.http.get('api/grocery-items/'+id, {
+      headers: headers
+    });
+  }
+
+  getGroceryItemsByCategory(category_id: String): Observable<any>{
+    let headers = new HttpHeaders();
+    return this.http.get('api/grocery-items/category/'+category_id, {
+      headers: headers
+    });
+  }
+
+  //
+  //  GROCERY ITEM CALLS END
+  //
+
+  // ==================================================================================
+
+
 }

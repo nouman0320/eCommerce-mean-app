@@ -29,6 +29,9 @@ app.get('*', function (req, res) {
 
 mongoose.connect(mongoConnectionString, function(){
   if(firstInitialize){
+    mongoose.connection.collections["groceryitems"].drop( function(err) {
+      console.log('groceryitems dropped');
+    });
     mongoose.connection.collections["administrators"].drop( function(err) {
         console.log('administrator dropped');
         new Admin({

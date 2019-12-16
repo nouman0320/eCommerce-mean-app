@@ -1,7 +1,7 @@
 <div class="card bg-light">
     <div class="ml-4 mr-4 mt-4 row">
         <h5 class="col-9 text-left text-secondary">Product Management</h5>
-        <p class="col-3 text-right text-secondary"><span style="cursor: pointer;"><i class="fas fa-plus"></i></span></p>
+        <p class="col-3 text-right text-secondary"><span style="cursor: pointer;"><i (click)="newProductStart()" class="fas fa-plus"></i></span></p>
     </div>
     <hr/>
     
@@ -12,7 +12,7 @@
                         <label for="name">Product Name:</label>
                     <input type="text" class="form-control" id="name"
                         required
-                        [(ngModel)]="productName" name="name"
+                        [(ngModel)]="this.productService.productName" name="name"
                         #name="ngModel">
                     <p [hidden]="name.valid || name.pristine"
                     class="text-danger small mt-1">Product name is required</p>
@@ -23,8 +23,7 @@
                     <label for="id">Product Id:</label>
                     <input type="number" class="form-control" id="id"
                         required
-                        [readonly]="true"
-                        [(ngModel)]="productId" name="id"
+                        [(ngModel)]="this.productService.productId" name="id"
                         #id="ngModel">
                     <p [hidden]="id.valid || id.pristine"
                     class="text-danger small mt-1">Id is required</p>
@@ -35,7 +34,7 @@
                     <label for="price">Product Price:</label>
                     <input type="number" class="form-control" id="price"
                         required
-                        [(ngModel)]="productPrice" name="price"
+                        [(ngModel)]="this.productService.productPrice" name="price"
                         #price="ngModel">
                     <p [hidden]="price.valid || price.pristine"
                     class="text-danger small mt-1">Price is required</p>
@@ -46,18 +45,15 @@
                 <div class="form-group">
                     <label for="picture">Picture URL:</label>
                     <input type="text" class="form-control" id="picture"
-                        [(ngModel)]="productPicture" name="picture"
+                        [(ngModel)]="this.productService.productPicture" name="picture"
                         #picture="ngModel">
                 </div>
 
                 <div class="form-group">
                         <label for="categoryselect">Product Category:</label>
-                    <select required [(ngModel)]="categoryValue" name="categoryselect" #selectcategory class="form-control" id="categoryselect">
+                    <select required [(ngModel)]="this.productService.productCategory" name="categoryselect" #selectcategory class="form-control" id="categoryselect">
                         <option disabled selected value="">Select Category </option>
-                        <option value="1">Milk & Eggs</option>
-                        <option value="2">Vegetable & Fruits</option>
-                        <option value="3">Meat & Fish</option>
-                        <option value="4">Wine & Drinks</option>
+                        <option *ngFor="let category of this.productService.categories; let i = index" [ngValue]="''+category.id">{{category.name}}</option>
                     </select>
 
                     <p *ngIf="selectcategory.errors?.required" [hidden]="selectcategory.valid || selectcategory.pristine"
