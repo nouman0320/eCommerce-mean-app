@@ -7,6 +7,7 @@ import { ToastrService } from 'ngx-toastr';
 import { UserService } from 'src/app/services/user.service';
 import { ShoppingCartItem } from 'src/app/Models/shopping-cart-item';
 import { CartService } from 'src/app/services/cart.service';
+import { createOfflineCompileUrlResolver } from '@angular/compiler';
 
 @Component({
   selector: 'app-product',
@@ -30,6 +31,18 @@ export class ProductComponent implements OnInit {
     //this.onSelect(0);
   }
 
+
+  getCategoryName(i: any){
+    //console.log(i);
+    console.log("getCategoryName called");
+    for(var x = 0; i < this.productService.categories.length; x++){
+      if(this.productService.categories[x].id === i)
+      {
+        console.log(this.productService.categories[x].name)
+        return this.productService.categories[x].name;
+      }
+    }
+  }
 
 
   decrement(){
@@ -59,11 +72,22 @@ export class ProductComponent implements OnInit {
       
       var cartItem = new ShoppingCartItem();
       cartItem.amount = amount;
-      cartItem.imageUrl = this.productService.onScreenProducts[this.lastSelectedProduct].imageUrl;
-      cartItem.name = this.productService.onScreenProducts[this.lastSelectedProduct].name;
-      cartItem.price = this.productService.onScreenProducts[this.lastSelectedProduct].price;
+      if(this.productService.searchTerm == '')
+      {
+        cartItem.imageUrl = this.productService.onScreenProducts[this.lastSelectedProduct].imageUrl;
+        cartItem.name = this.productService.onScreenProducts[this.lastSelectedProduct].name;
+        cartItem.price = this.productService.onScreenProducts[this.lastSelectedProduct].price;
+        cartItem.shoppingCartId = this.cartService.shoppingCart.id;
+        cartItem.totalPrice = cartItem.amount.valueOf()*cartItem.price.valueOf();
+      }
+      else {
+        cartItem.imageUrl = this.productService.onScreenProductsFromSearch[this.lastSelectedProduct].imageUrl;
+      cartItem.name = this.productService.onScreenProductsFromSearch[this.lastSelectedProduct].name;
+      cartItem.price = this.productService.onScreenProductsFromSearch[this.lastSelectedProduct].price;
       cartItem.shoppingCartId = this.cartService.shoppingCart.id;
       cartItem.totalPrice = cartItem.amount.valueOf()*cartItem.price.valueOf();
+      }
+      
 
       this.webService.newCartItem(cartItem).subscribe(
         data=>{
@@ -91,6 +115,33 @@ export class ProductComponent implements OnInit {
       this.productService.productName = this.productService.onScreenProducts[i].name;
       this.productService.productPicture = this.productService.onScreenProducts[i].imageUrl;
       this.productService.productPrice = this.productService.onScreenProducts[i].price;
+
+
+      console.log(this.productService.productCategory);
+      this.toastrServie.info("Now editing: '"+this.productService.productName+"'");
+    }
+    else{
+      this.orderQuantity = 1;
+      this.lastSelectedProduct = i;
+      this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
+        //this.closeResult = `Closed with: ${result}`;
+      }, (reason) => {
+        //this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+      });
+    }
+  }
+
+
+
+  openFromSearch(content, i: any) {
+
+    if(this.userService.isUserAdmin){
+      this.productService.newGroceryItem = false;
+      this.productService.productCategory = String(this.productService.onScreenProductsFromSearch[i].categoryId);
+      this.productService.productId = this.productService.onScreenProductsFromSearch[i].id;
+      this.productService.productName = this.productService.onScreenProductsFromSearch[i].name;
+      this.productService.productPicture = this.productService.onScreenProductsFromSearch[i].imageUrl;
+      this.productService.productPrice = this.productService.onScreenProductsFromSearch[i].price;
 
 
       console.log(this.productService.productCategory);

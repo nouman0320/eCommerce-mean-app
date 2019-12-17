@@ -13,8 +13,18 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
   }
 
-  search(q){
-    this.productService.searchTerm = q;
+  search(){
+    //console.log("search called "+this.productService.allProducts.length);
+    var search = this.productService.searchTerm;
+    this.productService.onScreenProductsFromSearch = [];
+    for(var i=0; i<this.productService.allProducts.length;i++){
+      //console.log(this.productService.allProducts[i].name);
+      if(this.productService.allProducts[i].name.toLowerCase().includes(search.toLowerCase())){
+        console.log("Search Term: "+search+" -> Result: "+this.productService.allProducts[i].name);
+        this.productService.onScreenProductsFromSearch.push(this.productService.allProducts[i]);
+      }
+    }
+
   }
 
 }

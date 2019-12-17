@@ -21,6 +21,9 @@ export class ProductService {
   selection: number = 0;
   onScreenProducts: GroceryItem[] = [];
 
+  onScreenProductsFromSearch: GroceryItem[] = [];
+  allProducts: GroceryItem[] = [];
+
 
   productName: String;
   productId: Number;
@@ -43,7 +46,30 @@ export class ProductService {
     this.productCategory = "";
   }
 
+
+  getAllProductsForSearch(){
+    this.allProducts = [];
+    this.categories.forEach(category => {
+    this.webService.getGroceryItemsByCategory(String(category.id)).subscribe(
+      data=>{
+        const gItems = data.data;
+        console.log(data);
+        gItems.forEach(e => {
+          const t = new GroceryItem();
+          t.categoryId = e.categoryId;
+          t.id = e.id;
+          t.imageUrl = e.imageUrl;
+          t.name = e.name;
+          t.price = e.price;
+          this.allProducts.push(t);
+        });
+      }
+    );
+    });
+  }
+
   onSelect(n: number){
+
 
     //console.log("select: "+n);
 
@@ -63,6 +89,7 @@ export class ProductService {
           temp.push(t);
         });
         this.onScreenProducts = temp;
+        this.getAllProductsForSearch();
         console.log(this.onScreenProducts);
       },
       err=>{
