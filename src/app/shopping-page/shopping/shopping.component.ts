@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cart.service';
+import { UserService } from 'src/app/services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-shopping',
@@ -20,7 +22,11 @@ export class ShoppingComponent implements OnInit {
   appCartClass: String = 'col-12 col-md-4';
   appProductClass: String = 'col-12 col-md-8'
 
-  constructor(public cartService: CartService) { }
+  constructor(public cartService: CartService, public userService: UserService, public router:Router) {
+    if(!this.userService.isUserLoggedIn){
+      this.router.navigate([""]);
+    }
+   }
 
   ngOnInit() {
   }

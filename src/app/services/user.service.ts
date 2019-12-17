@@ -48,6 +48,7 @@ export class UserService {
   removeSession(){
     this.isUserLoggedIn = false;
     localStorage.clear();
+    this.isUserAdmin = false;
     this.recentlyRemovedSession = true;
     console.log("removeSession() called");
   }

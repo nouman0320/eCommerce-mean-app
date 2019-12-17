@@ -29,8 +29,20 @@ app.get('*', function (req, res) {
 
 mongoose.connect(mongoConnectionString, function(){
   if(firstInitialize){
+    mongoose.connection.collections["customers"].drop( function(err) {
+      console.log('customers dropped');
+    });
     mongoose.connection.collections["groceryitems"].drop( function(err) {
       console.log('groceryitems dropped');
+    });
+    mongoose.connection.collections["grocerylistorders"].drop( function(err) {
+      console.log('grocerylistorders dropped');
+    });
+    mongoose.connection.collections["shoppingcartitems"].drop( function(err) {
+      console.log('shoppingcartitems dropped');
+    });
+    mongoose.connection.collections["shoppingcarts"].drop( function(err) {
+      console.log('shoppingcarts dropped');
     });
     mongoose.connection.collections["administrators"].drop( function(err) {
         console.log('administrator dropped');
