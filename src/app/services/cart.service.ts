@@ -73,6 +73,7 @@ export class CartService {
   initializeCart(userId: Number){
 
     this.webService.countGroceryItem().subscribe(data=>{this.availableProducts = data.data});
+    this.webService.countGroceryListOrder().subscribe(data=>{this.totalSubmittedOrders = data.data});
 
     this.shoppingCart = new ShoppingCart();
 

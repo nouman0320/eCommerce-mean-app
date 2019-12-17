@@ -10,6 +10,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrModule } from 'ngx-toastr';
 
+import { HighlightSearch } from './pipes/highlight.pipe';
+
 
 import { HeaderComponent } from './navigation-header/navigation/header/header.component';
 import { UserService } from './services/user.service';
@@ -50,7 +52,8 @@ import { CartService } from './services/cart.service';
     CheckoutComponent,
     AdminComponent,
     ProductManagementComponent,
-    AdminLoginComponent
+    AdminLoginComponent,
+    HighlightSearch
   ],
   imports: [
     NgbModule,

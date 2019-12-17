@@ -37,8 +37,8 @@ exports.customerDetails = function(req, res){
             "firstName": customer.firstName,
             "lastName": customer.lastName,
             "username": customer.username,
-            "AddressCity": customer.addressCity,
-            "AddressStreet": customer.addressStreet
+            "addressCity": customer.addressCity,
+            "addressStreet": customer.addressStreet
         }
 
       return res.status(200).json({

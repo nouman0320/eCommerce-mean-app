@@ -242,4 +242,31 @@ export class WebService {
   // ==================================================================================
 
 
+  //
+  //  GROCERY LIST ORDER CALLS START
+  //
+
+  countGroceryListOrder(): Observable<any>{
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    return this.http.get('/api/grocery-list-order/count' , {
+      headers: headers
+    });
+  }
+
+  newGroceryListOrder(groceryListOrder: any): Observable<any>{
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    let body = JSON.stringify(groceryListOrder);
+    return this.http.post('/api/grocery-list-order/' , body, {
+      headers: headers
+    });
+  }
+
+  //
+  //  GROCERY LIST ORDER CALLS END
+  //
+
+  // ==================================================================================
+
 }

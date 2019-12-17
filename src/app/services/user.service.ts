@@ -33,6 +33,8 @@ export class UserService {
     this.user = new User();
     this.user = data;
     this.isUserLoggedIn = true;
+    console.log(this.user)
+    console.log(this.user.addressCity)
     localStorage.setItem("username", this.user.username.toString());
     localStorage.setItem("id", this.user.id.toString());
     this.cartService.initializeCart(this.user.id);

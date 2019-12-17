@@ -20,7 +20,7 @@
                     </thead>
                     <tbody>
                       <tr *ngFor="let cartItem of this.cartService.shoppingCartItems; let i = index">
-                        <th scope="row text-center">{{cartItem.name}}</th>
+                        <th scope="row text-center"><div [innerHTML]="cartItem.name | highlight: this.productService.searchTerm" >{{cartItem.name}}</div></th >
                         <td>{{cartItem.amount}}</td>
                         <td>$ {{cartItem.price.valueOf()*cartItem.amount.valueOf()}}</td>
                         <td class="w-25">

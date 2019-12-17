@@ -28,6 +28,8 @@ export class ProductService {
   productPicture: String;
   productCategory: String = "";
 
+  searchTerm: string = "";
+
   newGroceryItem: Boolean = true;
 
 

@@ -3,6 +3,7 @@ import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { CartService } from 'src/app/services/cart.service';
 import { WebService } from 'src/app/services/web.service';
 import { ToastrService } from 'ngx-toastr';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-cart',
@@ -18,7 +19,7 @@ export class CartComponent implements OnInit {
 
   @Input() locked: Boolean = false;
 
-  constructor(private modalService: NgbModal, public cartService: CartService, public webService: WebService, public toastrService: ToastrService) { }
+  constructor(private modalService: NgbModal, public cartService: CartService, public webService: WebService, public toastrService: ToastrService, public productService: ProductService) { }
 
   ngOnInit() {
   }
