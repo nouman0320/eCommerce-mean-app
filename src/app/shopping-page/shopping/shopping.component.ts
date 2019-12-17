@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-shopping',
@@ -7,8 +8,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShoppingComponent implements OnInit {
 
-
-  cartCount: Number = 9;
 
   windowState: Number = 2; // 0 minmized; 1 default; 2 Maximized; 3 hidden
 
@@ -21,7 +20,7 @@ export class ShoppingComponent implements OnInit {
   appCartClass: String = 'col-12 col-md-4';
   appProductClass: String = 'col-12 col-md-8'
 
-  constructor() { }
+  constructor(public cartService: CartService) { }
 
   ngOnInit() {
   }

@@ -13,7 +13,7 @@ const ShoppingCartItemSchema = new mongoose.Schema({
   imageUrl: {
     type: String
   },
-  cartId: {
+  shoppingCartId: {
     type: Number,
     required: true
   },

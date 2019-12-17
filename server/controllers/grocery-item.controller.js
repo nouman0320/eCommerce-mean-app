@@ -1,5 +1,23 @@
 const GroceryItem = require('../models/grocery-item.model');
 
+// Method to count total items
+exports.countGroceryItem = function(req, res){
+  GroceryItem.countDocuments()
+  .then(function (count) {
+    return res.status(200).json({
+      status: 200,
+      data: count,
+      message: "Success"
+    });
+  })
+  .catch(function (err) {
+    return res.status(400).json({
+      status: 400,
+      message: err.message
+    });
+  });
+}
+
 // Method to get grocery-item details by id
 exports.groceryItemDetails = function(req, res){
     GroceryItem.findOne({"id": req.params.id})

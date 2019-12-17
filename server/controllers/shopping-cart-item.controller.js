@@ -2,7 +2,7 @@ const ShoppingCartItem = require('../models/shopping-cart-item.model');
 
 // Method to get shopping cart item with cart id
 exports.getShoppingCartItem = function(req, res){
-    ShoppingCartItem.find({"cartId": req.params.cartId})
+    ShoppingCartItem.find({"shoppingCartId": req.params.cartId})
     .then(function (shoppingCartItem) {
 
         if(shoppingCartItem == null) throw new Error("Unable to find any cart item");
@@ -28,7 +28,7 @@ exports.create = function (req, res) {
         "name": req.body.name,
         "price": req.body.price,
         "imageUrl": req.body.imageUrl,
-        "cartId": req.body.cartId,
+        "shoppingCartId": req.body.shoppingCartId,
         "amount": req.body.amount,
         "totalPrice": req.body.totalPrice
     });
@@ -58,7 +58,7 @@ exports.shoppingCartItemUpdate = function(req, res){
         "name": req.body.name,
         "price": req.body.price,
         "imageUrl": req.body.imageUrl,
-        "cartId": req.body.cartId,
+        "shoppingCartId": req.body.shoppingCartId,
         "amount": req.body.amount,
         "totalPrice": req.body.totalPrice
     };
@@ -66,7 +66,7 @@ exports.shoppingCartItemUpdate = function(req, res){
     ShoppingCartItem.findOneAndUpdate({"id": req.body.id}, shoppingCartItem, {new: true})
     .then(function (shoppingCartItem) {
 
-        if(shoppingCart == null) throw new Error("Shopping cart item doesn't exist");
+        if(shoppingCartItem == null) throw new Error("Shopping cart item doesn't exist");
 
       return res.status(200).json({
         status: 200,

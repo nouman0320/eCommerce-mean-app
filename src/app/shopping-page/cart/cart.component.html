@@ -2,12 +2,12 @@
     <div class="m-4 mt-4 pb-4">
     <p *ngIf="locked" class="text-right"><span style="cursor: pointer;" routerLink="/shop"><i class="fas fa-arrow-left mr-1"></i>Back to shop</span></p>
     <h4 class="text-center pt-2 text-secondary"><i class="fas fa-shopping-cart mr-1"></i>My Cart</h4>
-    <img *ngIf="isEmpty" class="mb-4 mt-4 mx-auto d-block" src="assets/img/empty-cart.png" width="70%" alt="image">
+    <img *ngIf="this.cartService.isEmpty" class="mb-4 mt-4 mx-auto d-block" src="assets/img/empty-cart.png" width="70%" alt="image">
     </div>
 
     
 
-    <div *ngIf="!isEmpty">
+    <div *ngIf="!this.cartService.isEmpty">
             <table class="table table-sm small text-dark text-center table-striped">
                     <thead>
                       <tr>
@@ -19,38 +19,24 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <th scope="row text-center">Product 1</th>
-                        <td>1</td>
-                        <td>$ 20.00</td>
+                      <tr *ngFor="let cartItem of this.cartService.shoppingCartItems; let i = index">
+                        <th scope="row text-center">{{cartItem.name}}</th>
+                        <td>{{cartItem.amount}}</td>
+                        <td>$ {{cartItem.price.valueOf()*cartItem.amount.valueOf()}}</td>
                         <td class="w-25">
-                                <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-3.jpg" class="img-fluid img-thumbnail" alt="Sheep">
+                                <img onError="this.src='assets/img/img-error.png'"
+                                [src]="cartItem.imageUrl" class="img-fluid img-thumbnail" alt="Sheep">
                         </td>
-                        <td *ngIf="!locked"><div class="row"><p (click)="onEdit(0, editModal)" class="col-6" style="cursor: pointer;"><i class="fas fa-pencil-alt"></i></p><p (click)="onDelete(0)" class="col-6" class="ml-2" style="cursor: pointer;"><i class="fas fa-times"></i></p></div></td>
+                        <td *ngIf="!locked"><div class="row"><p (click)="onEdit(i, editModal)" class="col-6" style="cursor: pointer;"><i class="fas fa-pencil-alt"></i></p><p (click)="onDelete(i)" class="col-6" class="ml-2" style="cursor: pointer;"><i class="fas fa-times"></i></p></div></td>
                       </tr>
-                      <tr>
-                            <th scope="row">Product 1</th>
-                            <td>1</td>
-                            <td>$ 20.00</td>
-                            <td class="w-25">
-                                    <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-3.jpg" class="img-fluid img-thumbnail" alt="Sheep">
-                            </td>
-                      </tr>
-                      <tr>
-                            <th scope="row">Product 1</th>
-                            <td>1</td>
-                            <td>$ 20.00</td>
-                            <td class="w-25">
-                                    <img src="https://s3.eu-central-1.amazonaws.com/bootstrapbaymisc/blog/24_days_bootstrap/sheep-3.jpg" class="img-fluid img-thumbnail" alt="Sheep">
-                            </td>
-                      </tr>
+                      
                     </tbody>
                   </table>
 
 
                   <div class="row p-4">
-                      <h5 class="text-dark col-8 pt-2">Total: <span class="text-success">${{totalAmount}}</span></h5>
-                      <button *ngIf="!locked" type="button" class="btn btn-success col-3 mr-2">Order</button>
+                      <h5 class="text-dark col-8 pt-2">Total: <span class="text-success">${{this.cartService.totalAmount}}</span></h5>
+                      <button *ngIf="!locked" type="button" routerLink="/checkout" class="btn btn-success col-3 mr-2">Order</button>
                   </div>
     </div>
 </div>
@@ -64,19 +50,19 @@
     </button>
   </div>
   <div class="modal-body">
-    <h5>Product 1</h5>
-    <p class="text-secondary">Total Quantity Available: 20</p>
+    <h5>{{this.cartService.shoppingCartItems[this.forEdit].name}}</h5>
+    <p class="text-secondary">Edit the quantity</p>
     <div class="row">
-          <div class="col-6 col-lg-4 mx-auto d-block">
+          <div class="col-7 col-lg-5 mx-auto d-block">
                   <div class="input-group">
               <span class="input-group-btn">
-                  <button type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
+                  <button (click)="decrement()" type="button" class="quantity-left-minus btn btn-danger btn-number"  data-type="minus" data-field="">
                           <i class="fas fa-minus"></i>
                   </button>
               </span>
-              <input type="text" id="quantity" name="quantity" class="form-control input-number" value="10" min="1" max="100">
+              <input type="number" [(ngModel)]="this.orderQuantity" id="quantity" name="quantity" class="form-control input-number" value="10" min="1" max="100">
               <span class="input-group-btn">
-                  <button type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
+                  <button (click)="increment()" type="button" class="quantity-right-plus btn btn-success btn-number" data-type="plus" data-field="">
                       <i class="fas fa-plus"></i>
                   </button>
               </span>
@@ -85,6 +71,6 @@
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-success" (click)="modal.close('Save click')">Save Changes</button>
+    <button type="button" class="btn btn-success" (click)="onUpdate()">Save Changes</button>
   </div>
 </ng-template>

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { WebService } from 'src/app/services/web.service';
 import { ToastrService } from 'ngx-toastr';
+import { CartService } from 'src/app/services/cart.service';
 
 @Component({
   selector: 'app-register',
@@ -26,7 +27,7 @@ export class RegisterComponent implements OnInit {
   userFirstName: String;
   userLastName: String;
 
-  constructor(public router: Router, public userService: UserService, public webService: WebService, public toastrService: ToastrService) {
+  constructor(public router: Router, public userService: UserService, public webService: WebService, public toastrService: ToastrService, public cartService: CartService) {
     if(this.userService.isUserLoggedIn){
       this.router.navigate(['']);
     }
@@ -88,6 +89,8 @@ export class RegisterComponent implements OnInit {
             this.onNextStep();
           }
         );*/
+
+        this.cartService.newUser = true;
 
         this.userService.setBusy(false);
         this.router.navigate(['']);

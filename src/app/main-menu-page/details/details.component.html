@@ -14,7 +14,7 @@
             <p class="text-dark text-center"> Continue shopping</p>
         
             <button type="button" (click)="gotoShop()" class="btn btn-info btn-md mx-auto d-block">
-                <i class="fas fa-shopping-basket mr-1"></i> Cart <span class="badge badge-light ml-2">{{this.cartService.totalCartItems}}</span>
+                <i class="fas fa-shopping-basket mr-1"></i> Cart <span class="badge badge-light ml-2">{{this.cartService.shoppingCartItems.length}}</span>
                 <span class="sr-only">this.cartService.cart items</span>
               </button>
     

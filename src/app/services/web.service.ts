@@ -106,6 +106,14 @@ export class WebService {
   //  GROCERY ITEM CALLS START
   //
 
+  countGroceryItem(): Observable<any>{
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    return this.http.get('/api/grocery-items/count' , {
+      headers: headers
+    });
+  }
+
   newGroceryItem(groceryItem: any): Observable<any>{
     let headers = new HttpHeaders();
     headers = headers.append('Content-Type', 'application/json');
@@ -185,6 +193,50 @@ export class WebService {
 
   //
   //  CART CALLS END
+  //
+
+  // ==================================================================================
+
+
+  //
+  //  CART ITEM CALLS START
+  //
+
+  newCartItem(cartItem: any): Observable<any>{
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    let body = JSON.stringify(cartItem);
+    return this.http.post('api/shopping-cart-item' , body, {
+      headers: headers
+    });
+  }
+
+  updateCartItem(cartItem: any): Observable<any>{
+    let headers = new HttpHeaders();
+    headers = headers.append('Content-Type', 'application/json');
+    let body = JSON.stringify(cartItem);
+    return this.http.post('api/shopping-cart-item/update' , body, {
+      headers: headers
+    });
+  }
+
+  getCartItems(cartId: String): Observable<any>{
+    let headers = new HttpHeaders();
+    return this.http.get('api/shopping-cart-item/'+cartId, {
+      headers: headers
+    });
+  }
+
+
+  deleteCartItem(id: String): Observable<any>{
+    let headers = new HttpHeaders();
+    return this.http.delete('api/shopping-cart-item/'+id, {
+      headers: headers
+    });
+  }
+
+  //
+  //  CART ITEM CALLS END
   //
 
   // ==================================================================================
